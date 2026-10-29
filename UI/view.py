@@ -82,6 +82,8 @@ class View:
             ft.Divider(),
 
             # Sezione 3
+            ft.Text("Strumenti", size=20),
+            pulsante_mostra_strumenti = ft.Button("Modifica", on_click=self.controller.handler_mostra_strumenti)
             # TODO
 
             # Sezione 4
