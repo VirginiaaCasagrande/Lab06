@@ -81,4 +81,36 @@ class DepositoStrumenti:
             :param tipo: il tipo dello strumento (es. "Chitarra")
             :return: una lista con tutti gli strumenti del tipo indicato oppure None
         """
-        # TODO
+        connection = None
+        cursor = None
+
+        try:
+            connection=get_connection()
+            if connection is None:
+                return None
+            cursor = connection.cursor(dictionary=True)
+            query = ("""SELECT *
+                     FROM Strumento
+                     WHERE tipo = %s""")
+
+            cursor.execute(query, (tipo,)) #esegue la ricerca usando il tipo ricevuto
+
+            strumenti = []
+
+            for riga in cursor:
+                s=Strumento(riga['codice'], riga['tipo'], riga['marca'], riga['anno_acquisto'], riga['valore'], riga['disponibile'])
+                strumenti.append(s)
+            return strumenti
+
+        except Exception as errore:
+            print(f'Errore nella ricerca degli strumenti: {errore}')
+            return None
+
+        finally:
+            if cursor is not None:
+                cursor.close()
+
+            if connection is not None:
+                connection.close()
+
+

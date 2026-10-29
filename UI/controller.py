@@ -40,4 +40,20 @@ class Controller:
                 self._view.lista_strumenti.controls.append(ft.Text(str(strumento)))
 
         self._view.update()
-    # TODO
+
+    def handler_cerca_strumenti(self, e):
+        tipo=self._view.input_tipo_strumento.value  #recupero il valore inserito dall'utente
+        strumenti=self._model.cerca_strumenti_per_tipo(tipo) #chiamo il metodo di cricerca degli strumenti del Model
+        self._view.lista_strumenti_ricerca.controls.clear()
+
+        if strumenti is None:
+            self._view.lista_strumenti_ricerca.controls.append(ft.Text('Errore'))
+        elif strumenti == []:
+            self._view.lista_strumenti_ricerca.controls.append(ft.Text('Nessun strumento trovato'))
+        else:
+            for strumento in strumenti:
+                self._view.lista_strumenti_ricerca.controls.append(ft.Text(str(strumento)))
+
+        self._view.update()
+
+
