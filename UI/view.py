@@ -63,6 +63,8 @@ class View:
         pulsante_conferma_responsabile = ft.Button("Conferma", on_click=self.controller.conferma_responsabile)
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
+        pulsante_mostra_strumenti=ft.Button('Mostra', on_click=self.controller.handler_mostra_strumenti)
+
         # TODO
 
         # --- LAYOUT ---
@@ -83,10 +85,14 @@ class View:
 
             # Sezione 3
             ft.Text("Strumenti", size=20),
-            pulsante_mostra_strumenti = ft.Button("Modifica", on_click=self.controller.handler_mostra_strumenti)
+            pulsante_mostra_strumenti,
+            self.lista_strumenti,
+            ft.Divider()
+
             # TODO
 
             # Sezione 4
+
             # TODO
         )
 

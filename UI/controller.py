@@ -30,7 +30,14 @@ class Controller:
     # Altre Funzioni Event Handler
 
     def handler_mostra_strumenti(self,e):
-        strumenti=self._model.get_strumenti()
-        print(strumenti)
+        strumenti=self._model.get_strumenti()  #il Controller chiama il metodo get_strumenti() del Model
+        self._view.lista_strumenti.controls.clear()
 
+        if strumenti is None:  #get_strumenti() può restituire anche None, quindi non una lista valida
+            self._view.lista_strumenti.controls.append(ft.Text('Errore'))
+        else:
+            for strumento in strumenti:
+                self._view.lista_strumenti.controls.append(ft.Text(str(strumento)))
+
+        self._view.update()
     # TODO

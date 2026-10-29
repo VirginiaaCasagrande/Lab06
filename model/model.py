@@ -46,8 +46,8 @@ class DepositoStrumenti:
             if connection is None:  #Comunico che la connessione non è riuscita
                 return None
 
-            cursor = connection.cursor() #Creo un cursore
-                                         # che mi serve per muovermi all'interno della base di dati
+            cursor = connection.cursor(dictionary=True) #Creo un cursore
+                                                        # che mi serve per muovermi all'interno della base di dati
 
             #Query SQL per recuperare gli strumenti del database
             query = "SELECT * FROM STRUMENTO"
@@ -57,7 +57,7 @@ class DepositoStrumenti:
             strumenti = []  #lista in cui inserire gli strumenti letti dal database
 
             for riga in cursor:
-                s=Strumento(riga[0], riga[1], riga[2], riga[3], riga[4], riga[5])
+                s=Strumento(riga['codice'], riga['tipo'], riga['marca'], riga['anno_acquisto'], riga['valore'], riga['disponibile'])
                 strumenti.append(s)
 
             return strumenti
